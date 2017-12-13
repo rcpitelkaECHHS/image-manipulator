@@ -17,7 +17,7 @@ def dramatize_image(image_file, logo=None):
     width = len(image[0])
     for r in range(0, height):
         for c in range(1, width):
-            if r/c > (height/width):
+            if (float(r)/float(c)) > (float(height)/float(width)):
                 color_value = int(round(sum(image[r][c])/3))
                 image[r][c] = (color_value, color_value, color_value)
     plt.imshow(image)
