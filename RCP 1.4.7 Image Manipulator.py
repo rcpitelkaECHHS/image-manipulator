@@ -11,7 +11,15 @@ def show_image(image_file):
     image = plt.imread(os.getcwd() + '/Image Files/' + image_file)
     plt.imshow(image)
 
-def dramatize_image(image_file, logo=None):
+def dramatize_image(image_file, logo=None, directory=None):
+    if directory == None:
+        directory = os.getcwd()
+    new_directory = os.path.join(directory, 'Modified Image Files')
+    try:
+        os.mkdir(new_directory)
+    except OSError:
+        pass
+    
     image = plt.imread(os.getcwd() + '/Image Files/' + image_file)
     height = len(image)
     width = len(image[0])
@@ -21,3 +29,5 @@ def dramatize_image(image_file, logo=None):
                 color_value = int(round(sum(image[r][c])/3))
                 image[r][c] = (color_value, color_value, color_value)
     plt.imshow(image)
+    plt.imsave(os.path.join(new_directory, image_file), image)
+    
